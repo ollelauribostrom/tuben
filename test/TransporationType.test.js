@@ -29,7 +29,7 @@ describe('{unit}: model/TransporationType', () => {
 
   it('should have correct symbol for type FERRY', () => {
     const type = new TransportationType('FERRY');
-    expect(type).to.have.property('symbol', '⛴️');
+    expect(type).to.have.property('symbol', '⛴');
   });
 
   it('should have correct symbol for type SHIP', () => {
@@ -38,7 +38,7 @@ describe('{unit}: model/TransporationType', () => {
   });
 
   it('should use default symbol for unspecified types', () => {
-    const type = new TransportationType();
+    const type = new TransportationType('OTHER');
     expect(type).to.have.property('symbol', '🔘');
   });
 });
