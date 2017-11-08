@@ -1,8 +1,8 @@
-export default class Journey {
+export default class Leg {
 
   constructor({ Origin, Destination } = {}) {
     if (!Origin || !Destination) {
-      throw new TypeError('Journey data must be provided in the form { Origin, Destination }');
+      throw new TypeError('Leg data must be provided in the form { Origin, Destination }');
     }
 
     this.from = Origin.name;
