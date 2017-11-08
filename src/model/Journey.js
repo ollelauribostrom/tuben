@@ -1,6 +1,6 @@
 export default class Journey {
 
-  constructor({ Origin, Destination }) {
+  constructor({ Origin, Destination } = {}) {
     if (!Origin || !Destination) {
       throw new TypeError('Journey data must be provided in the form { Origin, Destination }');
     }
