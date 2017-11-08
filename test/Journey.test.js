@@ -15,6 +15,6 @@ describe('{unit}: model/Journey', () => {
   });
   it('should throw a TypeError if instantiated with invalid journey data', () => {
     const getInstance = () => new Journey(JSON.stringify({ Origin: {}, Destination: {} }));
-    expect(getInstance()).to.throw(TypeError, 'Journey data must be provided in the form { Origin, Destination }');
+    expect(getInstance).to.throw(TypeError, 'Journey data must be provided in the form { Origin, Destination }');
   });
 });
