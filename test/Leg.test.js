@@ -17,4 +17,8 @@ describe('{unit}: model/Leg', () => {
     const getInstance = () => new Leg(JSON.stringify({ Origin: {}, Destination: {} }));
     expect(getInstance).to.throw(TypeError, 'Leg data must be provided in the form { Origin, Destination }');
   });
+  it('should throw a TypeError if instantiated with undefined value', () => {
+    const getInstance = () => new Leg(undefined);
+    expect(getInstance).to.throw(TypeError, 'Leg data must be provided in the form { Origin, Destination }');
+  });
 });
