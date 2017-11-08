@@ -1,11 +1,11 @@
 export default class Journey {
 
-  constructor(journeyData = {}) {
-    this.from = journeyData.from;
-    this.to = journeyData.to;
-    this.departureTime = journeyData.departureTime;
-    this.arrivalTime = journeyData.arrivalTime;
-    this.departureDate = journeyData.departureDate;
-    this.arrivalDate = journeyData.arrivalDate;
+  constructor({ Origin, Destination }) {
+    this.from = Origin.name;
+    this.to = Destination.name;
+    this.departureTime = Origin.time;
+    this.arrivalTime = Destination.time;
+    this.departureDate = Origin.date;
+    this.arrivalDate = Destination.date;
   }
 }
