@@ -1,23 +1,23 @@
 export default class TransportationType {
 
   static types = [
-    { type: 'METRO', symbol: '🚇' },
-    { type: 'BUS', symbol: '🚌' },
-    { type: 'TRAIN', symbol: '🚆' },
-    { type: 'TRAM', symbol: '🚋' },
-    { type: 'FERRY', symbol: '⛴' },
-    { type: 'SHIP', symbol: '🚢' },
+    { name: 'METRO', symbol: '🚇' },
+    { name: 'BUS', symbol: '🚌' },
+    { name: 'TRAIN', symbol: '🚆' },
+    { name: 'TRAM', symbol: '🚋' },
+    { name: 'FERRY', symbol: '⛴' },
+    { name: 'SHIP', symbol: '🚢' },
   ];
 
   static defaultSymbol = '🔘';
 
   constructor(typeName) {
-    this.type = typeName;
-    this.symbol = TransportationType.getSymbolOfType(typeName);
+    this.name = typeName;
+    this.symbol = TransportationType.getSymbolByTypeName(typeName);
   }
 
-  static getSymbolOfType(typeName) {
-    const type = TransportationType.types.find(t => t.type === typeName);
+  static getSymbolByTypeName(typeName) {
+    const type = TransportationType.types.find(typeObject => typeObject.name === typeName);
     return type ? type.symbol : TransportationType.defaultSymbol;
   }
 }

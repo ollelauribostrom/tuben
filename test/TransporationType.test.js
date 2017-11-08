@@ -4,7 +4,7 @@ import TransportationType from '../src/model/TransportationType';
 describe('{unit}: model/TransporationType', () => {
   it('should have correct properties', () => {
     const type = new TransportationType('METRO');
-    expect(type).to.have.all.keys('type', 'symbol');
+    expect(type).to.have.all.keys('name', 'symbol');
   });
 
   it('should have correct symbol for type METRO', () => {
