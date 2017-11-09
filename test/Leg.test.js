@@ -1,5 +1,6 @@
 import chai, { expect } from 'chai';
 import Leg from '../src/model/Leg';
+import TransportationType from '../src/model/TransportationType';
 
 const legData = {
   Origin: {
@@ -83,5 +84,9 @@ describe('{unit}: model/Leg', () => {
   it('should throw a TypeError if instantiated with undefined value', () => {
     const getInstance = () => new Leg(undefined);
     expect(getInstance).to.throw(TypeError, 'Leg data must be provided in the form { Origin, Destination }');
+  });
+  it('should have property transportationType of type TransportationType', () => {
+    const leg = new Leg(legData);
+    expect(leg.transportationType).to.be.an.instanceof(TransportationType);
   });
 });
