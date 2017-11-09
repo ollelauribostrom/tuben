@@ -1,6 +1,6 @@
 export default class Leg {
 
-  constructor({ Origin, Destination } = {}) {
+  constructor({ Origin, Destination, ...legData } = {}) {
     if (!Origin || !Destination) {
       throw new TypeError('Leg data must be provided in the form { Origin, Destination }');
     }
@@ -11,5 +11,7 @@ export default class Leg {
     this.arrivalTime = Destination.time;
     this.departureDate = Origin.date;
     this.arrivalDate = Destination.date;
+    this.direction = legData.direction;
+    this.transportationType = legData.Product.catOut;
   }
 }
