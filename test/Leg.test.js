@@ -63,18 +63,18 @@ const legData = {
 };
 
 describe('{unit}: model/Leg', () => {
-  it('should have correct properties after instantiation', () => {
+  it('should have correct properties/values after instantiation', () => {
     const leg = new Leg(legData);
-    expect(leg).to.have.all.keys(
-      'from',
-      'to',
-      'departureTime',
-      'arrivalTime',
-      'departureDate',
-      'arrivalDate',
-      'direction',
-      'transportationType',
-    );
+    expect(leg).to.deep.equal({
+      from: 'Slussen',
+      to: 'T-Centralen',
+      departureTime: '22:40:00',
+      arrivalTime: '22:43:00',
+      departureDate: '2017-11-08',
+      arrivalDate: '2017-11-08',
+      direction: 'Hässelby strand',
+      transportationType: 'METRO ',
+    });
   });
   it('should throw a TypeError if instantiated with invalid leg data', () => {
     const getInstance = () => new Leg(JSON.stringify(legData));
