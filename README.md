@@ -1,4 +1,4 @@
-# tuben - CLI travel planner for public transport in Stockholm
+# tuben - CLI travel planner for public transport in Stockholm <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Storstockholms_Lokaltrafik_logo.svg/737px-Storstockholms_Lokaltrafik_logo.svg.png" width="36,85" height="30">
 _todo_
 
 Installation
