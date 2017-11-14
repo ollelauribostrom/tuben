@@ -1,10 +1,10 @@
 {
-  "name": "reseplanerare",
+  "name": "tuben",
   "version": "1.0.0",
-  "description": "CLI travel planner for SL",
-  "main": "dist/reseplanerare.js",
+  "description": "A CLI travel planner for SL (Storstockholms Lokaltrafik)",
+  "main": "dist/travelPlanner.js",
   "bin": {
-    "reseplanerare": "dist/bin/index.js"
+    "tuben": "dist/bin/index.js"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
@@ -47,17 +47,22 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ollelauribostrom/reseplanerare.git"
+    "url": "git+https://github.com/ollelauribostrom/tuben.git"
   },
   "keywords": [
     "reseplanerare",
     "sl",
     "tunnelbana",
     "buss",
-    "travel planner"
+    "travel planner",
+    "Storstockholms Lokaltrafik",
+    "subway",
+    "stockholm",
+    "public transport",
+    "trafiklab"
   ],
   "bugs": {
-    "url": "https://github.com/ollelauribostrom/reseplanerare/issues"
+    "url": "https://github.com/ollelauribostrom/tuben/issues"
   },
-  "homepage": "https://github.com/ollelauribostrom/reseplanerare#readme"
+  "homepage": "https://github.com/ollelauribostrom/tuben#readme"
 }

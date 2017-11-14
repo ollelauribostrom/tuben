@@ -1,4 +1,4 @@
-# reseplanerare
+# tuben - CLI travel planner for public transport in Stockholm
 _todo_
 
 Installation
