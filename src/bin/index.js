@@ -1,7 +1,7 @@
 #! /usr/bin/env node
 
 import commander from 'commander';
-import reseplanerare from '../reseplanerare';
+import travelPlanner from '../travelPlanner';
 
 commander
   .version('1.0.0')
@@ -9,6 +9,6 @@ commander
   .option('-t, --to [to]', 'to destination')
   .parse(process.argv);
 
-const plan = reseplanerare(commander.from, commander.to);
+const plan = travelPlanner(commander.from, commander.to);
 console.log(plan);
 process.exit(0);
