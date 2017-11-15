@@ -9,6 +9,12 @@ commander
   .option('-t, --to [to]', 'to destination')
   .parse(process.argv);
 
-const plan = travelPlanner(commander.from, commander.to);
-console.log(plan);
-process.exit(0);
+travelPlanner(commander.from, commander.to)
+  .then((plan) => {
+    console.log(plan);
+    process.exit(0);
+  })
+  .catch((err) => {
+    console.log(err);
+    process.exit(1);
+  });
