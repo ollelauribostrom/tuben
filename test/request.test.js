@@ -24,3 +24,11 @@ describe('{unit}: request.buildQueryString', () => {
     expect(actual).to.equal(expected);
   });
 });
+
+describe('{unit}: request.buildUrl', () => {
+  it('should build complete url from url-string and parameters object', () => {
+    const actual = request.buildUrl('http://google.com', { a: 1, b: 2 });
+    const expected = 'http://google.com?a=1&b=2';
+    expect(actual).to.equal(expected);
+  });
+});
