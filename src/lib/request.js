@@ -14,3 +14,6 @@ export function buildUrl(url, parameters) {
   return `${url}?${buildQueryString(parameters)}`;
 }
 
+export function get() {
+
+}
