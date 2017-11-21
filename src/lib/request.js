@@ -10,7 +10,7 @@ export function buildQueryString(parameters) {
     .join('&');
 }
 
-export function buildUrl() {
-
+export function buildUrl(url, parameters) {
+  return `${url}?${buildQueryString(parameters)}`;
 }
 
