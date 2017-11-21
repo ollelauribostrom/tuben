@@ -23,7 +23,7 @@ describe('{unit}: request.buildParam', () => {
 describe('{unit}: request.buildQueryString', () => {
   it('should build query string from parameters object', () => {
     const actual = request.buildQueryString({ a: 1, b: 2 });
-    const expected = 'a=1&b=2';
+    const expected = '?a=1&b=2';
     expect(actual).to.equal(expected);
   });
 });
