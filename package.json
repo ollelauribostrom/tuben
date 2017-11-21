@@ -43,6 +43,7 @@
   "author": "Olle Lauri Boström <ollebostr@gmail.com> (https://github.com/ollelauribostrom)",
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.17.1",
     "commander": "^2.11.0"
   },
   "directories": {
