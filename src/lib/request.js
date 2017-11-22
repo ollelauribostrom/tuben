@@ -5,13 +5,17 @@ export function buildParam(key, value) {
 }
 
 export function buildQueryString(parameters) {
-  return `?${Object.entries(parameters)
+  return Object.entries(parameters)
     .map(([key, value]) => buildParam(key, value))
-    .join('&')}`;
+    .join('&');
 }
 
 export function buildUrl(url, parameters) {
-  return url + buildQueryString(parameters);
+  if (!parameters) {
+    return url;
+  }
+
+  return `${url}?${buildQueryString(parameters)}`;
 }
 
 export function get() {

@@ -23,7 +23,13 @@ describe('{unit}: request.buildParam', () => {
 describe('{unit}: request.buildQueryString', () => {
   it('should build query string from parameters object', () => {
     const actual = request.buildQueryString({ a: 1, b: 2 });
-    const expected = '?a=1&b=2';
+    const expected = 'a=1&b=2';
+    expect(actual).to.equal(expected);
+  });
+
+  it('should return empty string from empty parameters object', () => {
+    const actual = request.buildQueryString({});
+    const expected = '';
     expect(actual).to.equal(expected);
   });
 });
@@ -32,6 +38,12 @@ describe('{unit}: request.buildUrl', () => {
   it('should build complete url from url-string and parameters object', () => {
     const actual = request.buildUrl('http://google.com', { a: 1, b: 2 });
     const expected = 'http://google.com?a=1&b=2';
+    expect(actual).to.equal(expected);
+  });
+
+  it('should build correct url from url-string without parameters object', () => {
+    const actual = request.buildUrl('http://google.com');
+    const expected = 'http://google.com';
     expect(actual).to.equal(expected);
   });
 });
