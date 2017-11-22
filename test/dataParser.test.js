@@ -94,3 +94,69 @@ describe('{unit}: dataParser.getJourney', () => {
     expect(actual).to.deep.equal(expected);
   });
 });
+
+describe('{unit}: dataParser.getJourneys', () => {
+  it('should parse raw journeys data and return array of journeys', () => {
+    const actual = dataParser.getJourneys(mockJourneyData);
+    const expected = [
+      {
+        from: 'Slussen',
+        to: 'T-Centralen',
+        departureTime: '12:01:00',
+        arrivalTime: '12:05:00',
+        date: '2017-11-23',
+        legs: [
+          {
+            from: 'Slussen',
+            to: 'T-Centralen',
+            departureTime: '12:01:00',
+            arrivalTime: '12:05:00',
+            date: '2017-11-23',
+            line: '13',
+            direction: 'Ropsten',
+            type: { name: 'METRO', symbol: '🚇', char: 'T' },
+          },
+        ],
+      },
+      {
+        from: 'Slussen',
+        to: 'T-Centralen',
+        departureTime: '12:02:00',
+        arrivalTime: '12:06:00',
+        date: '2017-11-23',
+        legs: [
+          {
+            from: 'Slussen',
+            to: 'T-Centralen',
+            departureTime: '12:02:00',
+            arrivalTime: '12:06:00',
+            date: '2017-11-23',
+            line: '19',
+            direction: 'Hässelby strand',
+            type: { name: 'METRO', symbol: '🚇', char: 'T' },
+          },
+        ],
+      },
+      {
+        from: 'Slussen',
+        to: 'T-Centralen',
+        departureTime: '12:04:00',
+        arrivalTime: '12:09:00',
+        date: '2017-11-23',
+        legs: [
+          {
+            from: 'Slussen',
+            to: 'T-Centralen',
+            departureTime: '12:04:00',
+            arrivalTime: '12:09:00',
+            date: '2017-11-23',
+            line: '14',
+            direction: 'Mörby centrum',
+            type: { name: 'METRO', symbol: '🚇', char: 'T' },
+          },
+        ],
+      },
+    ];
+    expect(actual).to.deep.equal(expected);
+  });
+});

@@ -20,6 +20,13 @@ export function getLeg({
   return { from, to, departureTime, arrivalTime, date, line, direction, type };
 }
 
-export function getJourney() {
+export function getJourney({ LegList }) {
+  const legs = LegList.Leg.map(legData => getLeg(legData));
+  const { from, departureTime, date } = legs[0];
+  const { to, arrivalTime } = legs[legs.length - 1];
+  return { from, to, departureTime, arrivalTime, date, legs };
+}
+
+export function getJourneys() {
 
 }
