@@ -9,3 +9,7 @@ export function getStation({ ResponseData: stations }) {
 export function getLegType(typeName) {
   return transportationTypes[typeName] || transportationTypes.default;
 }
+
+export function getLeg() {
+
+}
