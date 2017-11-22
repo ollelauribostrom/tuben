@@ -53,7 +53,7 @@ describe('{unit}: request.get', () => {
 
   before(() => {
     get = sinon.stub(axios, 'get');
-    get.withArgs('http://google.com').returns(Promise.resolve());
+    get.returns(Promise.resolve({ data: [] }));
     get.withArgs('http://badurl.com').throws(Error);
   });
 
