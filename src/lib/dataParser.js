@@ -19,3 +19,7 @@ export function getLeg({
   const type = getLegType(typeName.trim());
   return { from, to, departureTime, arrivalTime, date, line, direction, type };
 }
+
+export function getJourney() {
+
+}

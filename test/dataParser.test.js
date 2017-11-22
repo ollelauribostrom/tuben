@@ -68,3 +68,29 @@ describe('{unit}: dataParser.getLeg', () => {
     expect(actual).to.deep.equal(expected);
   });
 });
+
+describe('{unit}: dataParser.getJourney', () => {
+  it('should parse raw journey data and return object', () => {
+    const actual = dataParser.getJourney(mockJourneyData.Trip[0]);
+    const expected = {
+      from: 'Slussen',
+      to: 'T-Centralen',
+      departureTime: '12:01:00',
+      arrivalTime: '12:05:00',
+      date: '2017-11-23',
+      legs: [
+        {
+          from: 'Slussen',
+          to: 'T-Centralen',
+          departureTime: '12:01:00',
+          arrivalTime: '12:05:00',
+          date: '2017-11-23',
+          line: '13',
+          direction: 'Ropsten',
+          type: { name: 'METRO', symbol: '🚇', char: 'T' },
+        },
+      ],
+    };
+    expect(actual).to.deep.equal(expected);
+  });
+});
