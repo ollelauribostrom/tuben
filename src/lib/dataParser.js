@@ -10,16 +10,12 @@ export function getLegType(typeName) {
   return transportationTypes[typeName] || transportationTypes.default;
 }
 
-export function getLeg({ Origin, Destination, Product, direction }) {
-  return {
-    from: Origin.name,
-    to: Destination.name,
-    departureTime: Origin.time,
-    arrivalTime: Destination.time,
-    departureDate: Origin.date,
-    arrivalDate: Destination.date,
-    line: Product.line,
-    direction,
-    transportationType: getLegType(Product.catOut.trim()),
-  };
+export function getLeg({
+  Origin: { name: from, time: departureTime, date },
+  Destination: { name: to, time: arrivalTime },
+  Product: { line, catOut: typeName },
+  direction,
+}) {
+  const type = getLegType(typeName.trim());
+  return { from, to, departureTime, arrivalTime, date, line, direction, type };
 }

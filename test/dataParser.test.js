@@ -60,11 +60,10 @@ describe('{unit}: dataParser.getLeg', () => {
       to: 'T-Centralen',
       departureTime: '12:01:00',
       arrivalTime: '12:05:00',
-      departureDate: '2017-11-23',
-      arrivalDate: '2017-11-23',
+      date: '2017-11-23',
       line: '13',
       direction: 'Ropsten',
-      transportationType: { name: 'METRO', symbol: '🚇', char: 'T' },
+      type: { name: 'METRO', symbol: '🚇', char: 'T' },
     };
     expect(actual).to.deep.equal(expected);
   });
