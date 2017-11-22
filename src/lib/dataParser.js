@@ -27,6 +27,6 @@ export function getJourney({ LegList }) {
   return { from, to, departureTime, arrivalTime, date, legs };
 }
 
-export function getJourneys() {
-
+export function getJourneys({ Trip }) {
+  return Trip.map(journeyData => getJourney(journeyData));
 }
