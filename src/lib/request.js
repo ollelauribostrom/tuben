@@ -19,9 +19,5 @@ export function buildUrl(url, parameters) {
 }
 
 export async function get(url, parameters) {
-  try {
-    return await axios.get(buildUrl(url, parameters));
-  } catch (error) {
-    throw new Error();
-  }
+  return axios.get(buildUrl(url, parameters));
 }
