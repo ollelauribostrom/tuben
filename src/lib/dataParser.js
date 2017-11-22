@@ -3,3 +3,7 @@ export function getStation({ ResponseData: stations }) {
   const similarStations = stations.map(station => station.Name);
   return { id, name, similarStations };
 }
+
+export function getLegType() {
+
+}
