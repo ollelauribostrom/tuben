@@ -18,6 +18,12 @@ export function buildUrl(url, parameters) {
   return `${url}?${buildQueryString(parameters)}`;
 }
 
-export function get() {
+export async function get(url, parameters) {
+  const response = await axios.get(buildUrl(url, parameters));
 
+  if (!response.ok) {
+    throw new Error();
+  }
+
+  return response;
 }
