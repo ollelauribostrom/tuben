@@ -49,33 +49,35 @@ describe('{unit}: request.buildUrl', () => {
 });
 
 describe('{unit}: request.get', () => {
-  let stub;
+  let get;
 
   before(() => {
-    stub = sinon.stub(axios, 'get');
-    stub.withArgs('http://google.com').returns(Promise.resolve({ ok: true }));
-    stub.withArgs('http://someurl.com').returns(Promise.resolve({ ok: false }));
+    get = sinon.stub(axios, 'get');
+    get.withArgs('http://google.com').returns(Promise.resolve());
+    get.withArgs('http://badurl.com').returns(Promise.reject());
   });
 
-  it('should resolve promise with response object on success', () => {
+  after(() => get.restore());
+
+  it('should resolve promise on success', () => {
     const req = request.get('http://google.com');
-    return expect(req).to.eventually.deep.equal({ ok: true });
+    return expect(req).to.eventually.be.resolved;
   });
 
   it('should reject promise on error', () => {
-    const req = request.get('http://someurl.com');
+    const req = request.get('http://badurl.com');
     return expect(req).to.eventually.be.rejected;
   });
 
   it('should make request to correct url when no parameter object is provided', () => {
     request.get('http://noparams.com');
-    const actual = stub.withArgs('http://noparams.com').calledOnce;
+    const actual = get.withArgs('http://noparams.com').calledOnce;
     return expect(actual).to.be.true;
   });
 
   it('should make request to correct url when parameter object is provided', () => {
     request.get('http://twoparams.com', { a: 1, b: 2 });
-    const actual = stub.withArgs('http://twoparams.com?a=1&b=2').calledOnce;
+    const actual = get.withArgs('http://twoparams.com?a=1&b=2').calledOnce;
     return expect(actual).to.be.true;
   });
 });
