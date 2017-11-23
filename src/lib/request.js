@@ -19,6 +19,6 @@ export function buildUrl(url, parameters) {
 }
 
 export async function get(url, parameters) {
-  const { data } = axios.get(buildUrl(url, parameters));
+  const { data } = await axios.get(buildUrl(url, parameters));
   return data;
 }
