@@ -5,7 +5,7 @@ import * as travelPlanner from '../src/travelPlanner';
 import * as request from '../src/lib/request';
 import * as dataParser from '../src/lib/dataParser';
 import * as config from '../src/config';
-import { stationObject } from './data';
+import { stationObject, journeyArray } from './data';
 
 chai.use(chaiAsPromised);
 
@@ -39,5 +39,34 @@ describe('{unit}: travelPlanner.searchForStation', () => {
   it('should reject promise on error', () => {
     const search = travelPlanner.searchForStation('not a station');
     return expect(search).to.eventually.be.rejected;
+  });
+});
+
+describe('{unit}: travelPlanner.travelTo', () => {
+  let get;
+  let getJourney;
+  let getJourneyKey;
+
+  before(() => {
+    get = sinon.stub(request, 'get').returns(Promise.resolve());
+    get.withArgs(config.journeyUrl, { key: 'key', to: 'to', from: 'from' }).throws(Error);
+    getJourney = sinon.stub(dataParser, 'getJourney').returns(Promise.resolve(journeyArray));
+    getJourneyKey = sinon.stub(config, 'getJourneyKey').returns('key');
+  });
+
+  after(() => {
+    get.restore();
+    getJourney.restore();
+    getJourneyKey.restore();
+  });
+
+  it('should resolve promise with array of journeys on success', () => {
+    const journeys = travelPlanner.travelTo('Nacka Station', 'Slussen');
+    return expect(journeys).to.eventually.deep.equal(journeyArray);
+  });
+
+  it('should reject promise on error', () => {
+    const journeys = travelPlanner.travelTo('to', 'from');
+    return expect(journeys).to.eventually.be.rejected;
   });
 });

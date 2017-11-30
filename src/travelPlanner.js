@@ -7,3 +7,7 @@ export async function searchForStation(searchstring) {
     await get(stationUrl, { searchstring, key: getStationKey() }),
   );
 }
+
+export async function travelTo() {
+  
+}
