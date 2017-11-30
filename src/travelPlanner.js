@@ -1,6 +1,6 @@
-import { getStation } from './lib/dataParser';
+import { getStation, getJourneys } from './lib/dataParser';
 import { get } from './lib/request';
-import { stationUrl, getStationKey } from './config';
+import { stationUrl, journeyUrl, getStationKey, getJourneyKey } from './config';
 
 export async function searchForStation(searchstring) {
   return getStation(
@@ -8,6 +8,8 @@ export async function searchForStation(searchstring) {
   );
 }
 
-export async function travelTo() {
-  
+export async function travelTo(to, from, time, date) {
+  return getJourneys(
+    await get(journeyUrl, { to, from, time, date, key: getJourneyKey() }),
+  );
 }

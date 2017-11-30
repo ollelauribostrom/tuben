@@ -44,19 +44,19 @@ describe('{unit}: travelPlanner.searchForStation', () => {
 
 describe('{unit}: travelPlanner.travelTo', () => {
   let get;
-  let getJourney;
+  let getJourneys;
   let getJourneyKey;
 
   before(() => {
     get = sinon.stub(request, 'get').returns(Promise.resolve());
-    get.withArgs(config.journeyUrl, { key: 'key', to: 'to', from: 'from' }).throws(Error);
-    getJourney = sinon.stub(dataParser, 'getJourney').returns(Promise.resolve(journeyArray));
+    get.withArgs(config.journeyUrl, { key: 'key', to: 'to', from: 'from', time: undefined, date: undefined }).throws(Error);
+    getJourneys = sinon.stub(dataParser, 'getJourneys').returns(Promise.resolve(journeyArray));
     getJourneyKey = sinon.stub(config, 'getJourneyKey').returns('key');
   });
 
   after(() => {
     get.restore();
-    getJourney.restore();
+    getJourneys.restore();
     getJourneyKey.restore();
   });
 
