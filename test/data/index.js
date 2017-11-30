@@ -1,3 +1,9 @@
+export const stationObject = {
+  id: '9430',
+  name: 'Nacka station (Nacka)',
+  similarStations: ['Järla station (Nacka)', 'Sickla station (Nacka)'],
+};
+
 export const mockStationData = {
   "StatusCode": 0,
   "Message": null,
