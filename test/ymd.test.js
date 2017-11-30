@@ -74,13 +74,13 @@ describe('{unit}: lib/ymd.js', () => {
     after(() => restoreDatePrototype());
 
     it('should return true if provided date in ymd-string format matches tomorrows date', () => {
-      const actual = ymd.isTomorrow('2017-11-26');
+      const actual = ymd.isTomorrow('2017-11-25');
       return expect(actual).to.be.true;
     });
 
     it('should return false if provided date in ymd-string format does not match tomorrows date', () => {
       const actual = ymd.isTomorrow('2017-11-23');
-      return expect(actual).to.be.true;
+      return expect(actual).to.be.false;
     });
 
     it('should return true if provided date object matches tomorrows date', () => {
@@ -94,7 +94,7 @@ describe('{unit}: lib/ymd.js', () => {
     it('should return false if provided date object does not match tomorrows date', () => {
       restoreDatePrototype();
       const actual = ymd.isTomorrow(new Date());
-      return expect(actual).to.be.true;
+      return expect(actual).to.be.false;
     });
   });
 });
