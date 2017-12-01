@@ -13,12 +13,12 @@ describe('{unit}: lib/hmsDiff.js', () => {
   });
 
   it('should throw TypeError if two hms strings are not provided', () => {
-    const callToHmsDiffWithOneArgument = hmsDiff('12:15:00');
+    const callToHmsDiffWithOneArgument = () => hmsDiff('12:15:00');
     return expect(callToHmsDiffWithOneArgument).to.throw(TypeError);
   });
 
   it('should throw TypeError if hms string is in wrong format', () => {
-    const callToHmsDiffWithOneArgument = hmsDiff('12.15', '12.19');
+    const callToHmsDiffWithOneArgument = () => hmsDiff('12.15', '12.19');
     return expect(callToHmsDiffWithOneArgument).to.throw(TypeError);
   });
 });
