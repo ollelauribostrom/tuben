@@ -1,19 +1,21 @@
-const pad = n => `0${n}`.slice(-2);
+export function isDateObject(obj) {
+  return Object.prototype.toString.call(obj) === '[object Date]' && isFinite(obj);
+}
 
-export function getStringDate(date = new Date()) {
-  if (Object.prototype.toString.call(date) !== '[object Date]') {
-    throw new TypeError();
+export function getStringDate(dateObj = new Date()) {
+  if (!isDateObject(dateObj)) {
+    throw new TypeError('Please provide a valid Date object');
   }
-  return [
-    date.getFullYear(),
-    pad(date.getMonth() + 1),
-    pad(date.getDate()),
-  ].join('-');
+
+  const year = dateObj.getFullYear();
+  const month = `${dateObj.getMonth() + 1}`.padStart(2, '0');
+  const date = `${dateObj.getDate()}`.padStart(2, '0');
+  return `${year}-${month}-${date}`;
 }
 
 export function isToday(date) {
-  if (Object.prototype.toString.call(date) === '[object Date]') {
-    return isToday(getStringDate(date));
+  if (isDateObject(date)) {
+    return getStringDate(date) === getStringDate();
   }
   return date === getStringDate();
 }
@@ -22,9 +24,8 @@ export function isTomorrow(date) {
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
 
-  if (Object.prototype.toString.call(date) === '[object Date]') {
-    return isTomorrow(getStringDate(date));
+  if (isDateObject(date)) {
+    return getStringDate(date) === getStringDate(tomorrow);
   }
-
   return date === getStringDate(tomorrow);
 }
