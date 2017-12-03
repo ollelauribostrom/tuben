@@ -50,3 +50,7 @@ export function getTimeString(now = new Date(), excludeSeconds = false) {
 
   return `${hours}:${minutes}:${seconds}`;
 }
+
+export function setTimeTo() {
+
+}

@@ -146,6 +146,42 @@ describe('{unit}: lib/hms.js getTimeString()', () => {
   });
 });
 
+describe('{unit}: lib/hms.js setTimeTo()', () => {
+  it('should set time of given date object to provided time string in hh:mm:ss format', () => {
+    const dateObj = hms.setTimeTo(new Date(), '12:10:10');
+    const actual = [dateObj.getHours(), dateObj.getMinutes(), dateObj.getSeconds()];
+    const expected = [12, 10, 10];
+    expect(actual).to.deep.equal(expected);
+  });
+
+  it('should throw TypeError if no date object is provided', () => {
+    const callToSetTimeToWithoutDateObj = () => hms.setTimeTo();
+    expect(callToSetTimeToWithoutDateObj).to.throw(TypeError);
+  });
+
+  it('should throw TypeError if a invalid date object is provided', () => {
+    const callToSetTimeToWithInvalidDateObj = () => hms.setTimeTo(new Date('invalid date'), '12:10:10');
+    expect(callToSetTimeToWithInvalidDateObj).to.throw(TypeError);
+  });
+
+  it('should throw TypeError if something else than a date object is provided', () => {
+    const callToSetTimeToWithNonDate = () => hms.setTimeTo({}, '12:10:10');
+    expect(callToSetTimeToWithNonDate).to.throw(TypeError);
+  });
+
+  it('should throw TypeError if time string is invalid', () => {
+    const callToSetTimeToWithInvalidTimeString = () => hms.setTimeTo({}, '12.10');
+    expect(callToSetTimeToWithInvalidTimeString).to.throw(TypeError);
+  });
+
+  it('should handle time strings in format hh:mm', () => {
+    const dateObj = hms.setTimeTo(new Date(), '09:09');
+    const actual = [dateObj.getHours(), dateObj.getMinutes(), dateObj.getSeconds()];
+    const expected = [9, 9, 0];
+    expect(actual).to.deep.equal(expected);
+  });
+});
+
 describe('{unit}: lib/hms.js isDateObject()', () => {
   it('should return true for valid Date object', () => {
     const actual = hms.isDateObject(new Date());
