@@ -6,6 +6,7 @@ export function buildParam(key, value) {
 
 export function buildQueryString(parameters) {
   return Object.entries(parameters)
+    .filter(([key, value]) => value)
     .map(([key, value]) => buildParam(key, value))
     .join('&');
 }

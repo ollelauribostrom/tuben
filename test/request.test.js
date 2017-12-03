@@ -32,6 +32,12 @@ describe('{unit}: request.buildQueryString', () => {
     const expected = '';
     expect(actual).to.equal(expected);
   });
+
+  it('should remove parameters with undefined values', () => {
+    const actual = request.buildQueryString({ a: undefined, b: 2 });
+    const expected = 'b=2';
+    expect(actual).to.equal(expected);
+  });
 });
 
 describe('{unit}: request.buildUrl', () => {
