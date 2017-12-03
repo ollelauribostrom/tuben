@@ -154,6 +154,11 @@ describe('{unit}: lib/hms.js setTimeTo()', () => {
     expect(actual).to.deep.equal(expected);
   });
 
+  it('should return the provided date object', () => {
+    const actual = hms.setTimeTo(new Date(), '12:10:10');
+    expect(actual).to.be.an.instanceof(Date);
+  });
+
   it('should throw TypeError if no date object is provided', () => {
     const callToSetTimeToWithoutDateObj = () => hms.setTimeTo();
     expect(callToSetTimeToWithoutDateObj).to.throw(TypeError);
