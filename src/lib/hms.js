@@ -1,3 +1,5 @@
+import { isDateObject } from './ymd';
+
 export function throwTypeError() {
   throw new TypeError('Please provide two time strings in the form hh:mm:ss || hh:mm');
 }
@@ -32,5 +34,17 @@ export function getDifference(start, end) {
 }
 
 export function getTimeString(now = new Date(), excludeSeconds = false) {
-  console.log(now, excludeSeconds);
+  if (!isDateObject(now)) {
+    throw new TypeError();
+  }
+
+  const hours = `${now.getHours()}`.padStart(2, '0');
+  const minutes = `${now.getMinutes()}`.padStart(2, '0');
+  const seconds = `${now.getSeconds()}`.padStart(2, '0');
+
+  if (excludeSeconds) {
+    return `${hours}:${minutes}`;
+  }
+
+  return `${hours}:${minutes}:${seconds}`;
 }
