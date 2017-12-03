@@ -51,6 +51,14 @@ export function getTimeString(now = new Date(), excludeSeconds = false) {
   return `${hours}:${minutes}:${seconds}`;
 }
 
-export function setTimeTo() {
+export function setTimeTo(dateObj, timeString) {
+  if (!isDateObject(dateObj)) {
+    throw new TypeError();
+  }
 
+  const [hours, minutes, seconds = 0] = parseTimeString(timeString);
+  dateObj.setHours(hours);
+  dateObj.setMinutes(minutes);
+  dateObj.setSeconds(seconds);
+  return dateObj;
 }
