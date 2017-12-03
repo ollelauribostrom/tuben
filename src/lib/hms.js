@@ -1,4 +1,6 @@
-import { isDateObject } from './ymd';
+export function isDateObject(obj) {
+  return Object.prototype.toString.call(obj) === '[object Date]' && isFinite(obj);
+}
 
 export function throwTypeError() {
   throw new TypeError('Please provide two time strings in the form hh:mm:ss || hh:mm');

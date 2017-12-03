@@ -113,7 +113,6 @@ describe('{unit}: lib/hms.js parseTimeString()', () => {
 });
 
 describe('{unit}: lib/hms.js getTimeString()', () => {
-
   describe('...', () => {
     before(() => mockDatePrototype(12, 10, 10));
     after(() => restoreDatePrototype());
@@ -144,5 +143,27 @@ describe('{unit}: lib/hms.js getTimeString()', () => {
   it('should throw typeError if called with something else than a date object', () => {
     const callWithNonDate = () => hms.getTimeString({});
     return expect(callWithNonDate).to.throw(TypeError);
+  });
+});
+
+describe('{unit}: lib/hms.js isDateObject()', () => {
+  it('should return true for valid Date object', () => {
+    const actual = hms.isDateObject(new Date());
+    return expect(actual).to.be.true;
+  });
+
+  it('should return false for invalid date objects', () => {
+    const actual = hms.isDateObject(new Date('invalid date'));
+    return expect(actual).to.be.false;
+  });
+
+  it('should return false when called with Date', () => {
+    const actual = hms.isDateObject(Date);
+    return expect(actual).to.be.false;
+  });
+
+  it('should return false for argument that is not a Date object', () => {
+    const actual = hms.isDateObject({});
+    return expect(actual).to.be.false;
   });
 });
