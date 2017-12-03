@@ -49,7 +49,7 @@ describe('{unit}: travelPlanner.travelTo', () => {
 
   before(() => {
     get = sinon.stub(request, 'get').returns(Promise.resolve());
-    get.withArgs(config.journeyUrl, { key: 'key', to: 'to', from: 'from', time: undefined, date: undefined }).throws(Error);
+    get.withArgs(config.journeyUrl, { key: 'key', destId: 'to', originId: 'from', time: undefined, date: undefined }).throws(Error);
     getJourneys = sinon.stub(dataParser, 'getJourneys').returns(Promise.resolve(journeyArray));
     getJourneyKey = sinon.stub(config, 'getJourneyKey').returns('key');
   });
@@ -66,7 +66,7 @@ describe('{unit}: travelPlanner.travelTo', () => {
   });
 
   it('should reject promise on error', () => {
-    const journeys = travelPlanner.travelTo('to', 'from');
+    const journeys = travelPlanner.travelTo('from', 'to');
     return expect(journeys).to.eventually.be.rejected;
   });
 });

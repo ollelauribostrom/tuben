@@ -8,8 +8,8 @@ export async function searchForStation(searchstring) {
   );
 }
 
-export async function travelTo(to, from, time, date) {
+export async function travelTo(originId, destId, time, date) {
   return getJourneys(
-    await get(journeyUrl, { to, from, time, date, key: getJourneyKey() }),
+    await get(journeyUrl, { originId, destId, time, date, key: getJourneyKey() }),
   );
 }
