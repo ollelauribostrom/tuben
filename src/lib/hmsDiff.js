@@ -1,19 +1,32 @@
-export default function (start, end) {
+export function throwTypeError() {
+  throw new TypeError('Please provide two time strings in the form hh:mm:ss || hh:mm');
+}
 
+export function isValidTimeString(timeString) {
+  return /^(?:2[0-3]|[01]?[0-9]):[0-5][0-9](?::([0-5]?\d))?$/.test(timeString);
+}
+
+export function parseTimeString(timeString) {
+  if (!isValidTimeString(timeString)) {
+    throwTypeError();
+  }
+
+  return timeString
+    .split(':')
+    .map(element => Number(element));
+}
+
+export function getDifference(start, end) {
   if (!start || !end) {
-    throw new TypeError();
+    throwTypeError();
   }
 
-  const [startH, startM, startS] = start.split(':').map(element => Number(element));
-  const [endH, endM, endS] = end.split(':').map(element => Number(element));
-
-  if (!startH || !startM || !endH || !endM) {
-    throw new TypeError();
-  }
+  const [startH, startM, startS] = parseTimeString(start);
+  const [endH, endM, endS] = parseTimeString(end);
 
   return {
     h: endH - startH,
     m: endM - startM,
-    s: endS ? endS : 0 - startS ? startS : 0,
+    s: endS || 0 - startS || 0,
   };
 }
