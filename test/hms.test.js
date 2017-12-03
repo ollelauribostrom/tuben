@@ -1,7 +1,7 @@
 import chai, { expect } from 'chai';
-import * as hms from '../src/lib/hmsDiff';
+import * as hms from '../src/lib/hms';
 
-describe('{unit}: lib/hmsDiff.js', () => {
+describe('{unit}: lib/hms.js', () => {
   it('should return an object with calculated time difference { h, m, s }', () => {
     const actual = hms.getDifference('12:15:00', '12:45:00');
     return expect(actual).to.deep.equal({ h: 0, m: 30, s: 0 });
@@ -38,7 +38,7 @@ describe('{unit}: lib/hmsDiff.js', () => {
   });
 });
 
-describe('{unit}: lib/hmsDiff.js throwTypeError()', () => {
+describe('{unit}: lib/hms.js throwTypeError()', () => {
   it('should throw a TypeError with correct message', () => {
     const expectedMessage = 'Please provide two time strings in the form hh:mm:ss || hh:mm';
     const callToThrowTypeError = () => hms.throwTypeError();
@@ -46,7 +46,7 @@ describe('{unit}: lib/hmsDiff.js throwTypeError()', () => {
   });
 });
 
-describe('{unit}: lib/hmsDiff.js isValidTimeString()', () => {
+describe('{unit}: lib/hms.js isValidTimeString()', () => {
   it('should return true for valid time strings in format hh:mm:ss', () => {
     const actual = hms.isValidTimeString('23:59:59');
     return expect(actual).to.be.true;
@@ -83,7 +83,7 @@ describe('{unit}: lib/hmsDiff.js isValidTimeString()', () => {
   });
 });
 
-describe('{unit}: lib/hmsDiff.js parseTimeString()', () => {
+describe('{unit}: lib/hms.js parseTimeString()', () => {
   it('should parse valid time string and return array of numbers [hh, mm, ss]', () => {
     const actual = hms.parseTimeString('10:12:00');
     return expect(actual).to.deep.equal([10, 12, 0]);
