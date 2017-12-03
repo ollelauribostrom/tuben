@@ -1,5 +1,22 @@
 import chai, { expect } from 'chai';
+import sinon from 'sinon';
 import * as hms from '../src/lib/hms';
+
+let getHours;
+let getMinutes;
+let getSeconds;
+
+function mockDatePrototype(hour, minute, second) {
+  getHours = sinon.stub(Date.prototype, 'getHours').returns(hour);
+  getMinutes = sinon.stub(Date.prototype, 'getMinutes').returns(minute);
+  getSeconds = sinon.stub(Date.prototype, 'getSeconds').returns(second);
+}
+
+function restoreDatePrototype() {
+  getHours.restore();
+  getMinutes.restore();
+  getSeconds.restore();
+}
 
 describe('{unit}: lib/hms.js', () => {
   it('should return an object with calculated time difference { h, m, s }', () => {
@@ -92,5 +109,40 @@ describe('{unit}: lib/hms.js parseTimeString()', () => {
   it('should throw TypeError if called with invalid time string', () => {
     const invalidCallToParseTimeString = () => hms.parseTimeString('10.12');
     return expect(invalidCallToParseTimeString).to.throw(TypeError);
+  });
+});
+
+describe('{unit}: lib/hms.js getTimeString()', () => {
+
+  describe('...', () => {
+    before(() => mockDatePrototype(12, 10, 10));
+    after(() => restoreDatePrototype());
+
+    it('should return "now" as hh-mm-ss time string if called without any arguments', () => {
+      const actual = hms.getTimeString();
+      return expect(actual).to.equal('12:10:10');
+    });
+
+    it('should exclude seconds if option is set to true', () => {
+      const actual = hms.getTimeString(new Date(), true);
+      return expect(actual).to.equal('12:10');
+    });
+
+    it('should pad single digits and always return format hh-mm-ss', () => {
+      restoreDatePrototype();
+      mockDatePrototype(9, 9, 9);
+      const actual = hms.getTimeString();
+      return expect(actual).to.equal('09:09:09');
+    });
+  });
+
+  it('should throw typeError if called with invalid date object', () => {
+    const callWithInvalidDateObject = () => hms.getTimeString(new Date('invalid date'));
+    return expect(callWithInvalidDateObject).to.throw(TypeError);
+  });
+
+  it('should throw typeError if called with something else than a date object', () => {
+    const callWithNonDate = () => hms.getTimeString({});
+    return expect(callWithNonDate).to.throw(TypeError);
   });
 });

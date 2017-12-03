@@ -30,3 +30,7 @@ export function getDifference(start, end) {
     s: endS || 0 - startS || 0,
   };
 }
+
+export function getTimeString(now = new Date(), excludeSeconds = false) {
+  console.log(now, excludeSeconds);
+}
