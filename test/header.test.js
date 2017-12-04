@@ -13,7 +13,6 @@ const header = proxyquire('../src/view/header', {
 });
 
 describe('{unit}: view/header.js', () => {
-
   describe('printHeader()', () => {
     let log;
 
