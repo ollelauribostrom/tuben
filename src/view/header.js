@@ -24,6 +24,6 @@ const logo = padLines(`
  "\`-0-0-'"\`-0-0-'"\`-0-0-'"\`-0-0-'"\`-0-0-'./o--000'"\`-0-0-'"\`-0-0-'`);
 
 export function printHeader() {
-  const header = `${chalk.white(padLines(logo))}${chalk.green(padLines(description))}`;
+  const header = `${chalk.white(logo)}${chalk.green(description)}`;
   log(chalk.bgBlue(header));
 }
