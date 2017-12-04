@@ -49,6 +49,7 @@
   "dependencies": {
     "axios": "^0.17.1",
     "chalk": "^2.3.0",
+    "cli-width": "^2.2.0",
     "commander": "^2.11.0",
     "dotenv": "^4.0.0"
   },
