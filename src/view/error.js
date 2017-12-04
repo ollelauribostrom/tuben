@@ -5,7 +5,7 @@ import { log } from './logger';
 export function generateErrorMessage(message = 'Please try again!') {
   const header = `${chalk.white.bgRed('Sorry, something went wrong.')} 😢`;
   const footer = `If the problem persists - open an issue @ ${chalk.blue(bugs.url)}`;
-  return `${header}\n${message}\n${footer}`;
+  return `\n${header}\n${message}\n${footer}\n`;
 }
 
 export function printError(error) {
