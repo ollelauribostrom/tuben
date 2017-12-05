@@ -62,3 +62,8 @@ export function setTimeTo(dateObj, timeString) {
   dateObj.setSeconds(seconds);
   return dateObj;
 }
+
+export function excludeSeconds(timeString) {
+  const [hours, minutes] = parseTimeString(timeString);
+  return `${hours}:${minutes}`;
+}
