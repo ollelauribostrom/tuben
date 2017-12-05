@@ -14,7 +14,7 @@ export const journeyArray = [
         date: '2017-11-23',
         line: '13',
         direction: 'Ropsten',
-        type: { name: 'METRO', symbol: '🚇', char: 'T' },
+        type: { name: 'METRO', symbol: '🚇', char: 'T', svName: 'Tunnelbana' },
       },
     ],
   },

@@ -17,37 +17,37 @@ describe('{unit}: dataParser.getStation', () => {
 describe('{unit}: dataParser.getLegType', () => {
   it('should resolve correct symbol, name and char for type METRO', () => {
     const actual = dataParser.getLegType('METRO');
-    const expected = { name: 'METRO', symbol: '🚇', char: 'T' };
+    const expected = { name: 'METRO', symbol: '🚇', char: 'T', svName: 'Tunnelbana' };
     expect(actual).to.deep.equal(expected);
   });
   it('should resolve correct symbol, name and char for type BUS', () => {
     const actual = dataParser.getLegType('BUS');
-    const expected = { name: 'BUS', symbol: '🚌', char: 'B' };
+    const expected = { name: 'BUS', symbol: '🚌', char: 'B', svName: 'Buss' };
     expect(actual).to.deep.equal(expected);
   });
   it('should resolve correct symbol, name and char for type TRAIN', () => {
     const actual = dataParser.getLegType('TRAIN');
-    const expected = { name: 'TRAIN', symbol: '🚆', char: 'J' };
+    const expected = { name: 'TRAIN', symbol: '🚆', char: 'J', svName: 'Pendeltåg' };
     expect(actual).to.deep.equal(expected);
   });
   it('should resolve correct symbol, name and char for type TRAM', () => {
     const actual = dataParser.getLegType('TRAM');
-    const expected = { name: 'TRAM', symbol: '🚋', char: 'L' };
+    const expected = { name: 'TRAM', symbol: '🚋', char: 'L', svName: 'Lokalbana' };
     expect(actual).to.deep.equal(expected);
   });
   it('should resolve correct symbol, name and char for type FERRY', () => {
     const actual = dataParser.getLegType('FERRY');
-    const expected = { name: 'FERRY', symbol: '⛴', char: 'W' };
+    const expected = { name: 'FERRY', symbol: '⛴', char: 'W', svName: 'Båt' };
     expect(actual).to.deep.equal(expected);
   });
   it('should resolve correct symbol, name and char for type SHIP', () => {
     const actual = dataParser.getLegType('SHIP');
-    const expected = { name: 'SHIP', symbol: '🚢', char: 'W' };
+    const expected = { name: 'SHIP', symbol: '🚢', char: 'W', svName: 'Båt' };
     expect(actual).to.deep.equal(expected);
   });
   it('should resolve correct symbol, name and char for unspecified types', () => {
     const actual = dataParser.getLegType('unspecified type');
-    const expected = { name: 'OTHER', symbol: '🔘', char: '?' };
+    const expected = { name: 'OTHER', symbol: '🔘', char: '?', svName: 'Resa' };
     expect(actual).to.deep.equal(expected);
   });
 });
@@ -63,7 +63,7 @@ describe('{unit}: dataParser.getLeg', () => {
       date: '2017-11-23',
       line: '13',
       direction: 'Ropsten',
-      type: { name: 'METRO', symbol: '🚇', char: 'T' },
+      type: { name: 'METRO', symbol: '🚇', char: 'T', svName: 'Tunnelbana' },
     };
     expect(actual).to.deep.equal(expected);
   });
@@ -87,7 +87,7 @@ describe('{unit}: dataParser.getJourney', () => {
           date: '2017-11-23',
           line: '13',
           direction: 'Ropsten',
-          type: { name: 'METRO', symbol: '🚇', char: 'T' },
+          type: { name: 'METRO', symbol: '🚇', char: 'T', svName: 'Tunnelbana' },
         },
       ],
     };
@@ -114,7 +114,7 @@ describe('{unit}: dataParser.getJourneys', () => {
             date: '2017-11-23',
             line: '13',
             direction: 'Ropsten',
-            type: { name: 'METRO', symbol: '🚇', char: 'T' },
+            type: { name: 'METRO', symbol: '🚇', char: 'T', svName: 'Tunnelbana' },
           },
         ],
       },
@@ -133,7 +133,7 @@ describe('{unit}: dataParser.getJourneys', () => {
             date: '2017-11-23',
             line: '19',
             direction: 'Hässelby strand',
-            type: { name: 'METRO', symbol: '🚇', char: 'T' },
+            type: { name: 'METRO', symbol: '🚇', char: 'T', svName: 'Tunnelbana' },
           },
         ],
       },
@@ -152,7 +152,7 @@ describe('{unit}: dataParser.getJourneys', () => {
             date: '2017-11-23',
             line: '14',
             direction: 'Mörby centrum',
-            type: { name: 'METRO', symbol: '🚇', char: 'T' },
+            type: { name: 'METRO', symbol: '🚇', char: 'T', svName: 'Tunnelbana' },
           },
         ],
       },

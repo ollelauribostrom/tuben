@@ -3,13 +3,13 @@ import env from 'dotenv';
 env.load();
 
 export const transportationTypes = {
-  METRO: { name: 'METRO', symbol: '🚇', char: 'T' },
-  BUS: { name: 'BUS', symbol: '🚌', char: 'B' },
-  TRAIN: { name: 'TRAIN', symbol: '🚆', char: 'J' },
-  TRAM: { name: 'TRAM', symbol: '🚋', char: 'L' },
-  FERRY: { name: 'FERRY', symbol: '⛴', char: 'W' },
-  SHIP: { name: 'SHIP', symbol: '🚢', char: 'W' },
-  default: { name: 'OTHER', symbol: '🔘', char: '?' },
+  METRO: { name: 'METRO', symbol: '🚇', char: 'T', svName: 'Tunnelbana' },
+  BUS: { name: 'BUS', symbol: '🚌', char: 'B', svName: 'Buss' },
+  TRAIN: { name: 'TRAIN', symbol: '🚆', char: 'J', svName: 'Pendeltåg' },
+  TRAM: { name: 'TRAM', symbol: '🚋', char: 'L', svName: 'Lokalbana' },
+  FERRY: { name: 'FERRY', symbol: '⛴', char: 'W', svName: 'Båt' },
+  SHIP: { name: 'SHIP', symbol: '🚢', char: 'W', svName: 'Båt' },
+  default: { name: 'OTHER', symbol: '🔘', char: '?', svName: 'Resa' },
 };
 
 export const stationUrl = 'http://api.sl.se/api2/typeahead.json';
