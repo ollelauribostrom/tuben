@@ -165,4 +165,24 @@ describe('{unit}: view/table.js', () => {
       return expect(legs).to.equal(expected);
     });
   });
+
+  describe('createDurationString()', () => {
+    it('should produce a correct duration string for single hour & single minute', () => {
+      const expected = '1 timme 1 minut';
+      const actual = table.createDurationString({ h: 1, m: 1 });
+      return expect(actual).to.equal(expected);
+    });
+
+    it('should produce a correct duration string for multiple hours & multiple minutes', () => {
+      const expected = '2 timmar 2 minuter';
+      const actual = table.createDurationString({ h: 2, m: 2 });
+      return expect(actual).to.equal(expected);
+    });
+
+    it('should produce a correct duration string for cases where hours are 0', () => {
+      const expected = '5 minuter';
+      const actual = table.createDurationString({ h: 0, m: 5 });
+      return expect(actual).to.equal(expected);
+    });
+  });
 });

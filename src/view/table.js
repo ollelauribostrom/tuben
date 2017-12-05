@@ -24,25 +24,21 @@ export function createLeg(leg) {
   return `${departure}${arrival}`;
 }
 
-export function createJourneyRow({ from, to, departureTime, arrivalTime, legs }) {
+export function createDurationString({ h: hours, m: minutes }) {
+  const theWordHours = hours === 1 ? 'timme' : 'timmar';
+  const theWordMinutes = minutes === 1 ? 'minut' : 'minuter';
 
-  const { h, m } = getDifference(departureTime, arrivalTime);
-  let duration = '';
-
-  if (h > 1) {
-    duration += `${h} timmar ${m} minuter`;
-  } else if (h === 1) {
-    duration += `${h} timme ${m} minuter`;
-  } else {
-    duration += `${m} minuter`;
+  if (hours === 0) {
+    return `${minutes} ${theWordMinutes}`;
   }
+  return `${hours} ${theWordHours} ${minutes} ${theWordMinutes}`;
+}
 
-  return [
-    from,
-    to,
-    excludeSeconds(departureTime),
-    excludeSeconds(arrivalTime),
-    duration,
-    legs.map(leg => createLeg(leg)).join(''),
-  ];
+export function createJourneyRow({ from, to, departureTime, arrivalTime, legs }) {
+  const duration = createDurationString(getDifference(departureTime, arrivalTime));
+  const depTime = excludeSeconds(departureTime);
+  const arrTime = excludeSeconds(arrivalTime);
+  const legList = legs.map(leg => createLeg(leg)).join('');
+
+  return [from, to, depTime, arrTime, duration, legList];
 }
