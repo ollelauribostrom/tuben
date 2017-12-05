@@ -21,12 +21,24 @@ function restoreDatePrototype() {
 describe('{unit}: lib/hms.js', () => {
   it('should return an object with calculated time difference { h, m, s }', () => {
     const actual = hms.getDifference('12:15:00', '12:45:00');
-    return expect(actual).to.deep.equal({ h: 0, m: 30, s: 0 });
+    return expect(actual).to.deep.equal({ h: 0, m: 30, s: 0, difference: 1800000 });
+  });
+
+  it('should handle 60 minutes as 1h, 0m', () => {
+    const actual = hms.getDifference('12:00:00', '13:00:00');
+    return expect(actual).to.deep.equal({ h: 1, m: 0, s: 0, difference: 3600000 });
+  });
+
+  it('should handle cases where startDate and endDate parameters are supplied to span over multiple dates', () => {
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const actual = hms.getDifference('23:30:00', '00:15:00', new Date(), tomorrow);
+    return expect(actual).to.deep.equal({ h: 0, m: 45, s: 0, difference: 2700000 });
   });
 
   it('should handle cases where only hour and minutes are provided', () => {
     const actual = hms.getDifference('12:15', '12:17');
-    return expect(actual).to.deep.equal({ h: 0, m: 2, s: 0 });
+    return expect(actual).to.deep.equal({ h: 0, m: 2, s: 0, difference: 120000 });
   });
 
   it('should throw TypeError if two hms strings are not provided', () => {

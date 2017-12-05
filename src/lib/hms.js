@@ -20,18 +20,20 @@ export function parseTimeString(timeString) {
     .map(element => Number(element));
 }
 
-export function getDifference(start, end) {
+export function getDifference(start, end, startDate = new Date(), endDate = new Date()) {
   if (!start || !end) {
     throwTypeError();
   }
 
-  const [startH, startM, startS] = parseTimeString(start);
-  const [endH, endM, endS] = parseTimeString(end);
+  const startDateObj = setTimeTo(startDate, start);
+  const endDateObj = setTimeTo(endDate, end);
+  const difference = endDateObj.getTime() - startDateObj.getTime();
 
   return {
-    h: endH - startH,
-    m: endM - startM,
-    s: endS || 0 - startS || 0,
+    h: Math.floor((difference / (1000 * 60 * 60)) % 24),
+    m: ((difference / (1000 * 60)) % 60),
+    s: (difference / 1000) % 60,
+    difference,
   };
 }
 
@@ -64,6 +66,8 @@ export function setTimeTo(dateObj, timeString) {
 }
 
 export function excludeSeconds(timeString) {
-  const [hours, minutes] = parseTimeString(timeString);
+  const [h, m] = parseTimeString(timeString);
+  const hours = `${h}`.padStart(2, '0');
+  const minutes = `${m}`.padStart(2, '0');
   return `${hours}:${minutes}`;
 }
