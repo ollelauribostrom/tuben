@@ -2,6 +2,8 @@ import chai, { expect } from 'chai';
 import sinon from 'sinon';
 import proxyquire from 'proxyquire';
 import * as logger from '../src/view/logger';
+import * as hms from '../src/lib/hms';
+import { journeyArray } from './data';
 
 const table = proxyquire('../src/view/table', {
   chalk: {
@@ -56,6 +58,22 @@ describe('{unit}: view/table.js', () => {
     it('should produce a correct symbol for legs of unknown types', () => {
       const expected = '?';
       const actual = table.createSymbol({ name: 'OTHER', char: '?' });
+      return expect(actual).to.equal(expected);
+    });
+  });
+
+  describe('createLeg()', () => {
+    let excludeSeconds;
+
+    before(() => {
+      excludeSeconds = sinon.stub(hms, 'excludeSeconds').returns('12:00');
+    });
+
+    after(() => excludeSeconds.restore());
+
+    it('should produce a correct leg string for type METRO', () => {
+      const expected = 'T: 12:00 Slussen - Tunnelbana 13 mot Ropsten\n   12:00 T-Centralen';
+      const actual = table.createLeg(journeyArray[0].legs[0]);
       return expect(actual).to.equal(expected);
     });
   });
