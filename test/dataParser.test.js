@@ -45,9 +45,14 @@ describe('{unit}: dataParser.getLegType', () => {
     const expected = { name: 'SHIP', symbol: '🚢', char: 'W', svName: 'Båt' };
     expect(actual).to.deep.equal(expected);
   });
+  it('should resolve correct symbol, name and char for type WALK', () => {
+    const actual = dataParser.getLegType('WALK');
+    const expected = { name: 'WALK', symbol: '🚶', char: '»', svName: 'Gå' };
+    expect(actual).to.deep.equal(expected);
+  });
   it('should resolve correct symbol, name and char for unspecified types', () => {
     const actual = dataParser.getLegType('unspecified type');
-    const expected = { name: 'OTHER', symbol: '🔘', char: '?', svName: 'Resa' };
+    const expected = { name: 'OTHER', symbol: '🔘', char: '?', svName: 'Res' };
     expect(actual).to.deep.equal(expected);
   });
 });
@@ -58,14 +63,41 @@ describe('{unit}: dataParser.getLeg', () => {
     const expected = {
       from: 'Slussen',
       to: 'T-Centralen',
-      departureTime: '12:01:00',
+      arrivalDate: '2017-11-23',
       arrivalTime: '12:05:00',
-      date: '2017-11-23',
+      departureTime: '12:01:00',
+      departureDate: '2017-11-23',
       line: '13',
       direction: 'Ropsten',
       type: { name: 'METRO', symbol: '🚇', char: 'T', svName: 'Tunnelbana' },
     };
     expect(actual).to.deep.equal(expected);
+  });
+  it('if Product is undefined assume leg is of type WALK and add distance to line', () => {
+    const mockLeg = Object.assign({}, mockJourneyData.Trip[0].LegList.Leg[0], {
+      Product: undefined,
+      dist: 100,
+    });
+    const actual = dataParser.getLeg(mockLeg);
+    const expected = {
+      from: 'Slussen',
+      to: 'T-Centralen',
+      arrivalDate: '2017-11-23',
+      arrivalTime: '12:05:00',
+      departureTime: '12:01:00',
+      departureDate: '2017-11-23',
+      line: '100 meter',
+      direction: 'Ropsten',
+      type: { name: 'WALK', symbol: '🚶', char: '»', svName: 'Gå' },
+    };
+    expect(actual).to.deep.equal(expected);
+  });
+  it('if direction is undefined, use to as default', () => {
+    const mockLeg = Object.assign({}, mockJourneyData.Trip[0].LegList.Leg[0], {
+      direction: undefined,
+    });
+    const actual = dataParser.getLeg(mockLeg);
+    expect(actual.direction).to.deep.equal('T-Centralen');
   });
 });
 
@@ -77,14 +109,16 @@ describe('{unit}: dataParser.getJourney', () => {
       to: 'T-Centralen',
       departureTime: '12:01:00',
       arrivalTime: '12:05:00',
-      date: '2017-11-23',
+      departureDate: '2017-11-23',
+      arrivalDate: '2017-11-23',
       legs: [
         {
           from: 'Slussen',
           to: 'T-Centralen',
           departureTime: '12:01:00',
           arrivalTime: '12:05:00',
-          date: '2017-11-23',
+          departureDate: '2017-11-23',
+          arrivalDate: '2017-11-23',
           line: '13',
           direction: 'Ropsten',
           type: { name: 'METRO', symbol: '🚇', char: 'T', svName: 'Tunnelbana' },
@@ -104,14 +138,16 @@ describe('{unit}: dataParser.getJourneys', () => {
         to: 'T-Centralen',
         departureTime: '12:01:00',
         arrivalTime: '12:05:00',
-        date: '2017-11-23',
+        departureDate: '2017-11-23',
+        arrivalDate: '2017-11-23',
         legs: [
           {
             from: 'Slussen',
             to: 'T-Centralen',
             departureTime: '12:01:00',
             arrivalTime: '12:05:00',
-            date: '2017-11-23',
+            departureDate: '2017-11-23',
+            arrivalDate: '2017-11-23',
             line: '13',
             direction: 'Ropsten',
             type: { name: 'METRO', symbol: '🚇', char: 'T', svName: 'Tunnelbana' },
@@ -123,14 +159,16 @@ describe('{unit}: dataParser.getJourneys', () => {
         to: 'T-Centralen',
         departureTime: '12:02:00',
         arrivalTime: '12:06:00',
-        date: '2017-11-23',
+        departureDate: '2017-11-23',
+        arrivalDate: '2017-11-23',
         legs: [
           {
             from: 'Slussen',
             to: 'T-Centralen',
             departureTime: '12:02:00',
             arrivalTime: '12:06:00',
-            date: '2017-11-23',
+            departureDate: '2017-11-23',
+            arrivalDate: '2017-11-23',
             line: '19',
             direction: 'Hässelby strand',
             type: { name: 'METRO', symbol: '🚇', char: 'T', svName: 'Tunnelbana' },
@@ -142,14 +180,16 @@ describe('{unit}: dataParser.getJourneys', () => {
         to: 'T-Centralen',
         departureTime: '12:04:00',
         arrivalTime: '12:09:00',
-        date: '2017-11-23',
+        departureDate: '2017-11-23',
+        arrivalDate: '2017-11-23',
         legs: [
           {
             from: 'Slussen',
             to: 'T-Centralen',
             departureTime: '12:04:00',
             arrivalTime: '12:09:00',
-            date: '2017-11-23',
+            departureDate: '2017-11-23',
+            arrivalDate: '2017-11-23',
             line: '14',
             direction: 'Mörby centrum',
             type: { name: 'METRO', symbol: '🚇', char: 'T', svName: 'Tunnelbana' },

@@ -9,7 +9,8 @@ export const transportationTypes = {
   TRAM: { name: 'TRAM', symbol: '🚋', char: 'L', svName: 'Lokalbana' },
   FERRY: { name: 'FERRY', symbol: '⛴', char: 'W', svName: 'Båt' },
   SHIP: { name: 'SHIP', symbol: '🚢', char: 'W', svName: 'Båt' },
-  default: { name: 'OTHER', symbol: '🔘', char: '?', svName: 'Resa' },
+  WALK: { name: 'WALK', symbol: '🚶', char: '»', svName: 'Gå' },
+  default: { name: 'OTHER', symbol: '🔘', char: '?', svName: 'Res' },
 };
 
 export const stationUrl = 'http://api.sl.se/api2/typeahead.json';
