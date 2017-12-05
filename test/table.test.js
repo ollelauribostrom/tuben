@@ -114,4 +114,55 @@ describe('{unit}: view/table.js', () => {
       return expect(actual).to.equal(expected);
     });
   });
+
+  describe('createJourneyRow()', () => {
+    it('should return an array', () => {
+      const actual = table.createJourneyRow(journeyArray[0]);
+      return expect(actual).to.be.an('array');
+    });
+
+    it('should include from-station', () => {
+      const [from] = table.createJourneyRow(journeyArray[0]);
+      return expect(from).to.equal('Slussen');
+    });
+
+    it('should include to-station', () => {
+      const [from, to] = table.createJourneyRow(journeyArray[0]);
+      return expect(to).to.equal('T-Centralen');
+    });
+
+    it('should include departure-time', () => {
+      const [from, to, departureTime] = table.createJourneyRow(journeyArray[0]);
+      return expect(departureTime).to.equal('12:00');
+    });
+
+    it('should include arrival-time', () => {
+      const [from, to, departureTime, arrivalTime] = table.createJourneyRow(journeyArray[0]);
+      return expect(arrivalTime).to.equal('12:00');
+    });
+
+    it('should include duration (travel time)', () => {
+      const [
+        from,
+        to,
+        departureTime,
+        arrivalTime,
+        duration,
+      ] = table.createJourneyRow(journeyArray[0]);
+      return expect(duration).to.equal('4 minuter');
+    });
+
+    it('should include leg list as string', () => {
+      const expected = 'T: 12:00 Slussen - Tunnelbana 13 mot Ropsten\n➜: 12:00 T-Centralen \n';
+      const [
+        from,
+        to,
+        departureTime,
+        arrivalTime,
+        duration,
+        legs
+      ] = table.createJourneyRow(journeyArray[0]);
+      return expect(legs).to.equal(expected);
+    });
+  });
 });

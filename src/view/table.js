@@ -23,3 +23,7 @@ export function createLeg(leg) {
   const arrival = createLegLine({ time: excludeSeconds(leg.arrivalTime), station: leg.to });
   return `${departure}${arrival}`;
 }
+
+export function createJourneyRow() {
+
+}
