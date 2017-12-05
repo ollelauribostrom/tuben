@@ -72,7 +72,7 @@ describe('{unit}: view/table.js', () => {
     after(() => excludeSeconds.restore());
 
     it('should produce a correct leg string for type METRO', () => {
-      const expected = 'T: 12:00 Slussen - Tunnelbana 13 mot Ropsten\n   12:00 T-Centralen';
+      const expected = 'T: 12:00 Slussen - Tunnelbana 13 mot Ropsten\n : 12:00 T-Centralen\n';
       const actual = table.createLeg(journeyArray[0].legs[0]);
       return expect(actual).to.equal(expected);
     });
