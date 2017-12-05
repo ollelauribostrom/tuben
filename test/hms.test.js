@@ -208,3 +208,21 @@ describe('{unit}: lib/hms.js isDateObject()', () => {
     return expect(actual).to.be.false;
   });
 });
+
+describe('{unit}: lib/hms.js excludeSeconds()', () => {
+  it('should remove seconds from provided time string in format hh:mm:ss', () => {
+    const actual = hms.excludeSeconds('12:15:10');
+    return expect(actual).to.equal('12:15');
+  });
+
+  it('should return time string if seconds is not included', () => {
+    const actual = hms.excludeSeconds('12:15');
+    return expect(actual).to.equal('12:15');
+  });
+
+  it('should throw TypeError for invalid time strings', () => {
+    const invalidCallToExcludeSeconds = () => hms.excludeSeconds('12.15.10');
+    return expect(invalidCallToExcludeSeconds).to.throw(TypeError);
+  });
+});
+
