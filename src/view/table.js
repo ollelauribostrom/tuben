@@ -1,5 +1,5 @@
 import chalk from 'chalk';
-import { excludeSeconds } from '../lib/hms';
+import { excludeSeconds, getDifference } from '../lib/hms';
 
 export function createSymbol({ char }) {
   return chalk.inverse(char);
@@ -24,6 +24,25 @@ export function createLeg(leg) {
   return `${departure}${arrival}`;
 }
 
-export function createJourneyRow() {
+export function createJourneyRow({ from, to, departureTime, arrivalTime, legs }) {
 
+  const { h, m } = getDifference(departureTime, arrivalTime);
+  let duration = '';
+
+  if (h > 1) {
+    duration += `${h} timmar ${m} minuter`;
+  } else if (h === 1) {
+    duration += `${h} timme ${m} minuter`;
+  } else {
+    duration += `${m} minuter`;
+  }
+
+  return [
+    from,
+    to,
+    excludeSeconds(departureTime),
+    excludeSeconds(arrivalTime),
+    duration,
+    legs.map(leg => createLeg(leg)).join(''),
+  ];
 }
