@@ -1,6 +1,6 @@
 import chalk from 'chalk';
 import Table from 'cli-table';
-import { excludeSeconds, getDifference } from '../lib/hms';
+import { stripSeconds, getDifference } from '../lib/hms';
 import { log } from './logger';
 
 export function createSymbol({ char }) {
@@ -14,7 +14,7 @@ export function createLegLine({ symbol = ' ➜ ', time, station, description = '
 export function createDescriptiveLegLine({ type, departureTime, from, line, direction }) {
   return createLegLine({
     symbol: createSymbol(type, line),
-    time: excludeSeconds(departureTime),
+    time: stripSeconds(departureTime),
     station: from,
     description: `- ${type.svName} ${line} mot ${direction}`,
   });
@@ -22,7 +22,7 @@ export function createDescriptiveLegLine({ type, departureTime, from, line, dire
 
 export function createLeg(leg) {
   const departure = createDescriptiveLegLine(leg);
-  const arrival = createLegLine({ time: excludeSeconds(leg.arrivalTime), station: leg.to });
+  const arrival = createLegLine({ time: stripSeconds(leg.arrivalTime), station: leg.to });
   return `${departure}${arrival}`;
 }
 
@@ -49,8 +49,8 @@ export function createJourneyRow({
   const arrDateObj = new Date(arrivalDate);
   const difference = getDifference(departureTime, arrivalTime, depDateObj, arrDateObj);
   const duration = createDurationString(difference);
-  const depTime = excludeSeconds(departureTime);
-  const arrTime = excludeSeconds(arrivalTime);
+  const depTime = stripSeconds(departureTime);
+  const arrTime = stripSeconds(arrivalTime);
   const legList = legs.map(leg => createLeg(leg)).join('');
 
   return [from, to, depTime, arrTime, duration, legList];

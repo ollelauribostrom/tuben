@@ -18,20 +18,20 @@ const table = proxyquire('../src/view/table', {
 
 describe('{unit}: view/table.js', () => {
   let log;
-  let excludeSeconds;
+  let stripSeconds;
   let pushToTable;
   let tableToString;
 
   beforeEach(() => {
     log = sinon.stub(logger, 'log');
-    excludeSeconds = sinon.stub(hms, 'excludeSeconds').returns('12:00');
+    stripSeconds = sinon.stub(hms, 'stripSeconds').returns('12:00');
     pushToTable = sinon.spy(Table.prototype, 'push');
     tableToString = sinon.spy(Table.prototype, 'toString');
   });
 
   afterEach(() => {
     log.restore();
-    excludeSeconds.restore();
+    stripSeconds.restore();
     pushToTable.restore();
     tableToString.restore();
   });
