@@ -67,11 +67,15 @@ describe('{unit}: lib/hms.js', () => {
   });
 });
 
-describe('{unit}: lib/hms.js throwTypeError()', () => {
-  it('should throw a TypeError with correct message', () => {
-    const expectedMessage = 'Please provide two time strings in the form hh:mm:ss || hh:mm';
-    const callToThrowTypeError = () => hms.throwTypeError();
-    return expect(callToThrowTypeError).to.throw(TypeError, expectedMessage);
+describe('{unit}: lib/hms.js validateDateObject()', () => {
+  it('should throw a TypeError if called with invalid Date object', () => {
+    const expectedMessage = 'Please provide a valid Date object';
+    const callToValidateDateObject = () => hms.validateDateObject(new Date('invalid date'));
+    return expect(callToValidateDateObject).to.throw(TypeError, expectedMessage);
+  });
+  it('should not throw TypError if called with valid Date Object', () => {
+    const callToValidateDateObject = () => hms.validateDateObject(new Date());
+    return expect(callToValidateDateObject).to.not.throw(TypeError);
   });
 });
 
@@ -134,7 +138,7 @@ describe('{unit}: lib/hms.js getTimeString()', () => {
       return expect(actual).to.equal('12:10:10');
     });
 
-    it('should exclude seconds if option is set to true', () => {
+    it('should excludeSeconds if option is set to true', () => {
       const actual = hms.getTimeString(new Date(), true);
       return expect(actual).to.equal('12:10');
     });
@@ -221,20 +225,20 @@ describe('{unit}: lib/hms.js isDateObject()', () => {
   });
 });
 
-describe('{unit}: lib/hms.js excludeSeconds()', () => {
+describe('{unit}: lib/hms.js stripSeconds()', () => {
   it('should remove seconds from provided time string in format hh:mm:ss', () => {
-    const actual = hms.excludeSeconds('12:15:10');
+    const actual = hms.stripSeconds('12:15:10');
     return expect(actual).to.equal('12:15');
   });
 
   it('should return time string if seconds is not included', () => {
-    const actual = hms.excludeSeconds('12:15');
+    const actual = hms.stripSeconds('12:15');
     return expect(actual).to.equal('12:15');
   });
 
   it('should throw TypeError for invalid time strings', () => {
-    const invalidCallToExcludeSeconds = () => hms.excludeSeconds('12.15.10');
-    return expect(invalidCallToExcludeSeconds).to.throw(TypeError);
+    const invalidCallToStripSecondsSeconds = () => hms.stripSeconds('12.15.10');
+    return expect(invalidCallToStripSecondsSeconds).to.throw(TypeError);
   });
 });
 
