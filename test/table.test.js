@@ -135,47 +135,39 @@ describe('{unit}: view/table.js', () => {
     });
 
     it('should include from-station', () => {
-      const [from] = table.createJourneyRow(journeyArray[0]);
-      return expect(from).to.equal('Slussen');
+      const expected = 'Slussen';
+      const [actual] = table.createJourneyRow(journeyArray[0]);
+      return expect(actual).to.equal(expected);
     });
 
     it('should include to-station', () => {
-      const [from, to] = table.createJourneyRow(journeyArray[0]);
-      return expect(to).to.equal('T-Centralen');
+      const expected = 'T-Centralen';
+      const actual = table.createJourneyRow(journeyArray[0]);
+      return expect(actual[1]).to.equal(expected);
     });
 
     it('should include departure-time', () => {
-      const [from, to, departureTime] = table.createJourneyRow(journeyArray[0]);
-      return expect(departureTime).to.equal('12:00');
+      const expected = '12:00';
+      const actual = table.createJourneyRow(journeyArray[0]);
+      return expect(actual[2]).to.equal(expected);
     });
 
     it('should include arrival-time', () => {
-      const [from, to, departureTime, arrivalTime] = table.createJourneyRow(journeyArray[0]);
-      return expect(arrivalTime).to.equal('12:00');
+      const expected = '12:00';
+      const actual = table.createJourneyRow(journeyArray[0]);
+      return expect(actual[3]).to.equal(expected);
     });
 
     it('should include duration (travel time)', () => {
-      const [
-        from,
-        to,
-        departureTime,
-        arrivalTime,
-        duration,
-      ] = table.createJourneyRow(journeyArray[0]);
-      return expect(duration).to.equal('4 minuter');
+      const expected = '4 minuter';
+      const actual = table.createJourneyRow(journeyArray[0]);
+      return expect(actual[4]).to.equal(expected);
     });
 
     it('should include leg list as string', () => {
       const expected = ' T : 12:00 Slussen - Tunnelbana 13 mot Ropsten\n ➜ : 12:00 T-Centralen \n';
-      const [
-        from,
-        to,
-        departureTime,
-        arrivalTime,
-        duration,
-        legs
-      ] = table.createJourneyRow(journeyArray[0]);
-      return expect(legs).to.equal(expected);
+      const actual = table.createJourneyRow(journeyArray[0]);
+      return expect(actual[5]).to.equal(expected);
     });
   });
 

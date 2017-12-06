@@ -36,8 +36,18 @@ export function createDurationString({ h: hours, m: minutes }) {
   return `${hours} ${theWordHours} ${minutes} ${theWordMinutes}`;
 }
 
-export function createJourneyRow({ from, to, departureTime, arrivalTime, legs, departureDate, arrivalDate }) {
-  const difference = getDifference(departureTime, arrivalTime, new Date(departureDate), new Date(arrivalDate));
+export function createJourneyRow({
+  from,
+  to,
+  departureTime,
+  arrivalTime,
+  legs,
+  departureDate,
+  arrivalDate,
+}) {
+  const depDateObj = new Date(departureDate);
+  const arrDateObj = new Date(arrivalDate);
+  const difference = getDifference(departureTime, arrivalTime, depDateObj, arrDateObj);
   const duration = createDurationString(difference);
   const depTime = excludeSeconds(departureTime);
   const arrTime = excludeSeconds(arrivalTime);
