@@ -9,6 +9,7 @@ module.exports = {
     "node": true,
   },
   "rules": {
+    "import/prefer-default-export": 0,
     "no-console": 0,
     "no-unused-vars": ["error", {
       "varsIgnorePattern": "chai|should",
