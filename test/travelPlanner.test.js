@@ -9,7 +9,7 @@ import { stationObject, journeyArray } from './data';
 
 chai.use(chaiAsPromised);
 
-describe('{unit}: travelPlanner.searchForStation', () => {
+describe('{unit}: travelPlanner.js searchForStation()', () => {
   let get;
   let getStation;
   let getStationKey;
@@ -28,21 +28,18 @@ describe('{unit}: travelPlanner.searchForStation', () => {
   });
 
   it('should resolve promise with station object on success', () => {
-    const search = travelPlanner.searchForStation('Nacka Station');
-    return expect(search).to.eventually.deep.equal({
-      id: '9430',
-      name: 'Nacka station (Nacka)',
-      similarStations: ['Järla station (Nacka)', 'Sickla station (Nacka)'],
-    });
+    const expected = stationObject;
+    const actual = travelPlanner.searchForStation('Nacka Station');
+    return expect(actual).to.eventually.deep.equal(expected);
   });
 
   it('should reject promise on error', () => {
-    const search = travelPlanner.searchForStation('not a station');
-    return expect(search).to.eventually.be.rejected;
+    const actual = travelPlanner.searchForStation('not a station');
+    return expect(actual).to.eventually.be.rejected;
   });
 });
 
-describe('{unit}: travelPlanner.travelTo', () => {
+describe('{unit}: travelPlanner.js travelTo()', () => {
   let get;
   let getJourneys;
   let getJourneyKey;
@@ -61,12 +58,13 @@ describe('{unit}: travelPlanner.travelTo', () => {
   });
 
   it('should resolve promise with array of journeys on success', () => {
-    const journeys = travelPlanner.travelTo('Nacka Station', 'Slussen');
-    return expect(journeys).to.eventually.deep.equal(journeyArray);
+    const expected = journeyArray;
+    const actual = travelPlanner.travelTo('Nacka Station', 'Slussen');
+    return expect(actual).to.eventually.deep.equal(expected);
   });
 
   it('should reject promise on error', () => {
-    const journeys = travelPlanner.travelTo('from', 'to');
-    return expect(journeys).to.eventually.be.rejected;
+    const actual = travelPlanner.travelTo('from', 'to');
+    return expect(actual).to.eventually.be.rejected;
   });
 });
