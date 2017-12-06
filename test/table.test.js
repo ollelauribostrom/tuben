@@ -1,6 +1,7 @@
 import chai, { expect } from 'chai';
 import sinon from 'sinon';
 import proxyquire from 'proxyquire';
+import Table from 'cli-table';
 import * as logger from '../src/view/logger';
 import * as hms from '../src/lib/hms';
 import { journeyArray } from './data';
@@ -18,56 +19,68 @@ const table = proxyquire('../src/view/table', {
 describe('{unit}: view/table.js', () => {
   let log;
   let excludeSeconds;
+  let pushToTable;
+  let tableToString;
 
-  before(() => {
+  beforeEach(() => {
     log = sinon.stub(logger, 'log');
     excludeSeconds = sinon.stub(hms, 'excludeSeconds').returns('12:00');
+    pushToTable = sinon.spy(Table.prototype, 'push');
+    tableToString = sinon.spy(Table.prototype, 'toString');
   });
 
-  after(() => {
+  afterEach(() => {
     log.restore();
     excludeSeconds.restore();
+    pushToTable.restore();
+    tableToString.restore();
   });
 
   describe('createSymbol()', () => {
     it('should produce a correct symbol for legs of type METRO', () => {
-      const expected = 'T';
+      const expected = ' T ';
       const actual = table.createSymbol({ name: 'METRO', char: 'T' });
       return expect(actual).to.equal(expected);
     });
 
     it('should produce a correct symbol for legs of type BUS', () => {
-      const expected = 'B';
+      const expected = ' B ';
       const actual = table.createSymbol({ name: 'BUS', char: 'B' });
       return expect(actual).to.equal(expected);
     });
 
     it('should produce a correct symbol for legs of type TRAIN', () => {
-      const expected = 'J';
+      const expected = ' J ';
       const actual = table.createSymbol({ name: 'TRAIN', char: 'J' });
       return expect(actual).to.equal(expected);
     });
 
     it('should produce a correct symbol for legs of type TRAM', () => {
-      const expected = 'L';
+      const expected = ' L ';
       const actual = table.createSymbol({ name: 'TRAM', char: 'L' });
       return expect(actual).to.equal(expected);
     });
 
     it('should produce a correct symbol for legs of type FERRY', () => {
-      const expected = 'W';
+      const expected = ' W ';
       const actual = table.createSymbol({ name: 'FERRY', char: 'W' });
       return expect(actual).to.equal(expected);
     });
 
     it('should produce a correct symbol for legs of type SHIP', () => {
-      const expected = 'W';
+      const expected = ' W ';
       const actual = table.createSymbol({ name: 'SHIP', char: 'W' });
       return expect(actual).to.equal(expected);
     });
 
+    it('should produce a correct symbol for legs of type WALK', () => {
+      const expected = ' » ';
+      const actual = table.createSymbol({ name: 'WALK', char: '»' });
+      return expect(actual).to.equal(expected);
+    });
+
     it('should produce a correct symbol for legs of unknown types', () => {
-      const expected = '?';
+      const expected = ' ? ';
       const actual = table.createSymbol({ name: 'OTHER', char: '?' });
       return expect(actual).to.equal(expected);
     });
@@ -75,7 +88,7 @@ describe('{unit}: view/table.js', () => {
 
   describe('createLeg()', () => {
     it('should produce a correct leg string', () => {
-      const expected = 'T: 12:00 Slussen - Tunnelbana 13 mot Ropsten\n➜: 12:00 T-Centralen \n';
+      const expected = ' T : 12:00 Slussen - Tunnelbana 13 mot Ropsten\n ➜ : 12:00 T-Centralen \n';
       const actual = table.createLeg(journeyArray[0].legs[0]);
       return expect(actual).to.equal(expected);
     });
@@ -83,7 +96,7 @@ describe('{unit}: view/table.js', () => {
 
   describe('createDescriptiveLegLine()', () => {
     it('should produce a correct leg line with description', () => {
-      const expected = 'T: 12:00 Slussen - Tunnelbana 13 mot Ropsten\n';
+      const expected = ' T : 12:00 Slussen - Tunnelbana 13 mot Ropsten\n';
       const actual = table.createDescriptiveLegLine({
         type: { name: 'METRO', symbol: '🚇', char: 'T', svName: 'Tunnelbana' },
         departureTime: '12:00:00',
@@ -109,7 +122,7 @@ describe('{unit}: view/table.js', () => {
     });
 
     it('should use default symbol if none provided', () => {
-      const expected = '➜: b c \n';
+      const expected = ' ➜ : b c \n';
       const actual = table.createLegLine({ time: 'b', station: 'c' });
       return expect(actual).to.equal(expected);
     });
@@ -153,7 +166,7 @@ describe('{unit}: view/table.js', () => {
     });
 
     it('should include leg list as string', () => {
-      const expected = 'T: 12:00 Slussen - Tunnelbana 13 mot Ropsten\n➜: 12:00 T-Centralen \n';
+      const expected = ' T : 12:00 Slussen - Tunnelbana 13 mot Ropsten\n ➜ : 12:00 T-Centralen \n';
       const [
         from,
         to,
@@ -183,6 +196,23 @@ describe('{unit}: view/table.js', () => {
       const expected = '5 minuter';
       const actual = table.createDurationString({ h: 0, m: 5 });
       return expect(actual).to.equal(expected);
+    });
+  });
+
+  describe('printTravelPlanTable()', () => {
+    it('should push created journeys to the table', () => {
+      table.printTravelPlanTable(journeyArray);
+      return expect(pushToTable.calledOnce).to.be.true;
+    });
+
+    it('should convert to string', () => {
+      table.printTravelPlanTable(journeyArray);
+      return expect(tableToString.calledOnce).to.be.true;
+    });
+
+    it('should log table strint to console', () => {
+      table.printTravelPlanTable(journeyArray);
+      return expect(log.calledOnce).to.be.true;
     });
   });
 });
