@@ -46,6 +46,9 @@ export function createJourneyRow({ from, to, departureTime, arrivalTime, legs, d
   return [from, to, depTime, arrTime, duration, legList];
 }
 
-export function printTravelPlanTable() {
-
+export function printTravelPlanTable(journeys) {
+  const table = new Table({ head: ['Från', 'Till', 'När', 'Framme', 'Restid', 'Hur?'] });
+  const rows = journeys.map(journey => createJourneyRow(journey));
+  table.push(...rows);
+  log(table.toString());
 }
