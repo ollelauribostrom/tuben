@@ -1,7 +1,12 @@
 #! /usr/bin/env node
 
 import commander from 'commander';
-import travelPlanner from '../travelPlanner';
+import clear from 'cli-clear';
+import ora from 'ora';
+import { searchForStation, travelTo } from '../travelPlanner';
+import { printHeader } from '../view/header';
+import { printTravelPlanTable } from '../view/table';
+import { printError } from '../view/error';
 
 commander
   .version('1.0.0')
@@ -9,12 +14,24 @@ commander
   .option('-t, --to [to]', 'to destination')
   .parse(process.argv);
 
-travelPlanner(commander.from, commander.to)
-  .then((plan) => {
-    console.log(plan);
-    process.exit(0);
-  })
-  .catch((err) => {
-    console.log(err);
-    process.exit(1);
-  });
+export async function plan(from, to) {
+  const spinner = ora('Söker efter resor');
+
+  try {
+    clear();
+    printHeader();
+    spinner.start();
+    const toStation = await searchForStation(to);
+    const fromStation = await searchForStation(from);
+    const travelPlan = await travelTo(fromStation.id, toStation.id);
+    spinner.stop();
+    printTravelPlanTable(travelPlan);
+  } catch (error) {
+    spinner.stop();
+    printError(error);
+  }
+}
+
+if (process.env.NODE_ENV !== 'test') {
+  plan(commander.from, commander.to);
+}
