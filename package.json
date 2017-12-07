@@ -18,6 +18,7 @@
     "babel-preset-stage-2": "^6.24.1",
     "chai": "3.5.0",
     "chai-as-promised": "^7.1.1",
+    "coveralls": "^3.0.0",
     "eslint": "3.19.0",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-plugin-import": "^2.8.0",
@@ -42,6 +43,7 @@
     "prepare": "npm run build",
     "test": "mocha --timeout 10000 --compilers js:babel-register",
     "coverage": "nyc --temp-directory ./test/coverage/tmp mocha --timeout 10000 --compilers js:babel-register",
+    "coverall": "nyc report --temp-directory ./test/coverage/tmp mocha --timeout 10000 --compilers js:babel-register --reporter=text-lcov | coveralls",
     "lint": "eslint src test"
   },
   "author": "Olle Lauri Boström <ollebostr@gmail.com> (https://github.com/ollelauribostrom)",

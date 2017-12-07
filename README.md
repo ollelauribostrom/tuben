@@ -1,4 +1,6 @@
-# tuben <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Storstockholms_Lokaltrafik_logo.svg/737px-Storstockholms_Lokaltrafik_logo.svg.png" width="36,85" height="30">
+# tuben <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Storstockholms_Lokaltrafik_logo.svg/737px-Storstockholms_Lokaltrafik_logo.svg.png" width="36,85" height="30"> 
+[![Coverage Status](https://coveralls.io/repos/github/ollelauribostrom/tuben/badge.svg?branch=master)](https://coveralls.io/github/ollelauribostrom/tuben?branch=master) [![Known Vulnerabilities](https://snyk.io/test/github/ollelauribostrom/tuben/badge.svg)](https://snyk.io/test/github/ollelauribostrom/tuben)
+
 A CLI travel planner for SL (Storstockholms Lokaltrafik)
 
 > Under construction
