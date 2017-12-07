@@ -7,9 +7,10 @@ import { searchForStation, travelTo } from '../travelPlanner';
 import { printHeader } from '../view/header';
 import { printTravelPlanTable } from '../view/table';
 import { printError } from '../view/error';
+import { version } from '../../package.json';
 
 commander
-  .version('1.0.0')
+  .version(version)
   .option('-f, --from [from]', 'from destination')
   .option('-t, --to [to]', 'to destination')
   .parse(process.argv);
@@ -29,6 +30,7 @@ export async function plan(from, to) {
   } catch (error) {
     spinner.stop();
     printError(error);
+    console.error(error);
   }
 }
 
