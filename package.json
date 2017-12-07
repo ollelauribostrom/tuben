@@ -39,7 +39,7 @@
   },
   "scripts": {
     "dev": "babel src -D -d dist --watch",
-    "build": "babel src -D -d dist",
+    "build": "rm -r dist && babel src -D -d dist",
     "prepare": "npm run build",
     "test": "mocha --timeout 10000 --compilers js:babel-register",
     "coverage": "nyc --temp-directory ./test/coverage/tmp mocha --timeout 10000 --compilers js:babel-register",
@@ -61,10 +61,7 @@
   "directories": {
     "test": "test"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ollelauribostrom/tuben.git"
-  },
+  "repository": "git+https://github.com/ollelauribostrom/tuben.git",
   "keywords": [
     "reseplanerare",
     "sl",
