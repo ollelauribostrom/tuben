@@ -34,6 +34,7 @@ export async function plan(from, to) {
   }
 }
 
+/* istanbul ignore if */
 if (process.env.NODE_ENV !== 'test') {
   plan(commander.from, commander.to);
 }
