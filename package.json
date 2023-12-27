@@ -46,7 +46,7 @@
   "author": "Olle Lauri Boström <ollebostr@gmail.com> (https://github.com/ollelauribostrom)",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.17.1",
+    "axios": "^1.6.3",
     "chalk": "^2.3.0",
     "cli-clear": "^1.0.4",
     "cli-table": "^0.3.1",
